@@ -1,0 +1,11 @@
+wheel
+
+fastapi
+jinja2
+lxml
+markdown
+passlib
+pymongo
+python-dotenv
+python-jwt
+uvicorn

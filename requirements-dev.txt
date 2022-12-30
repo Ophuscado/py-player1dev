@@ -1,0 +1,8 @@
+-r requirements.txt
+# -r requirements-test.txt
+black
+ipdb
+ipython
+isort
+pylint
+twine
