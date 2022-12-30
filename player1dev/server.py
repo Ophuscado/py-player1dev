@@ -21,9 +21,15 @@ from jinja2 import (
 )
 from lxml import etree
 
-app = FastAPI()
-
+assets = f"{os.getcwd()}/assets"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
+templates = Jinja2Templates(directory=f"{os.getcwd()}/templates")
+
+app = FastAPI()
+app.mount("/assets", StaticFiles(directory=assets), name="/assets")
+
+
+get_routes = lambda: app.routes
 
 
 def authenticate_user(username: str, password: str):
@@ -55,14 +61,6 @@ def get_current_username(token: str = Security(oauth2_scheme)):
         return username
     except PyJWTError:
         raise HTTPException(status_code=401, detail="Invalid JWT token")
-
-
-assets = f"{os.getcwd()}/assets"
-app.mount(assets, StaticFiles(directory=assets), name="assets")
-
-templates = Jinja2Templates(directory=f"{os.getcwd()}/templates")
-
-get_routes = lambda: app.routes
 
 
 @app.post("/auth/login")

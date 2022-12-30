@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title or "Player1 Development Toolkits" }}</title>
+  <link rel="stylesheet" href="/assets/prerender-default.css" />
+</head>
+
+<body>
+  <a href="/"><img src="/assets/example.png" alt="Example" width="128"></a>
+  <nav style="display: flex; justify-content: space-between;">
+    <div>
+      <a href="/">Home</a>
+    </div>
+    <div>
+      <!-- <a href="/start-free-trial">Start free trial</a> -->
+    </div>
+  </nav>
+
+  {% block main %}
+  {{ content }}
+
+  {% if created or modified %}
+  <hr>
+  <details>
+    <summary>Metadata</summary>
+    <p>
+    <pre>Metadata:
+  Author: {{ author or "Example" }}.
+  Categories: {{ categories or "Pages" }}.
+  Languages: {{ languages or "en" }}.
+  Status: {{ status or "Published" }}.
+  UUID: {{ uuid or "00000000" }}.
+  ---
+  Cached: {{ cached or modified }}.
+  Created: {{ created }}.
+  Modified: {{ modified }}.</pre>
+    </p>
+  </details>
+  {% endif %}
+  {% endblock %}
+  <footer style="display: flex; justify-content: space-around">
+    <div>
+      <h4>One</h4>
+      <ul>
+        <li><a href="/">Example</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Two</h4>
+      <ul>
+        <li><a href="/">Example</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Three</h4>
+      <ul>
+        <li><a href="/">Example</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Four</h4>
+      <ul>
+        <li><a href="/">Example</a></li>
+      </ul>
+    </div>
+  </footer>
+  <footer style="display: flex; justify-content: space-between; padding: 0 1em;">
+    <pre>...</pre>
+    <pre style="text-align: right;">Copyright © 2023, Example.
+All rights reserved.</pre>
+  </footer>
+</body>
+
+</html>

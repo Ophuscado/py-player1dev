@@ -1,18 +1,16 @@
-# Player1 Development Toolkits
+# Example
 
 ## About
 
-A framework for perfectionists to build at light speed. Powered by Flet (Flutter) and FastAPI.
+[...]
 
 ## Attributions
 
-This project has influence from many sources. You can find a quasi-complete list of attributions in the file [`ATTRIBUTIONS.md`.](https://github.com/Ophuscado/py-player1dev/blob/master/ATTRIBUTIONS.md)
+This project has influence from many sources. You can find a quasi-complete list of attributions in the file [`ATTRIBUTIONS.md`.](https://github.com/Example/app/blob/master/ATTRIBUTIONS.md)
 
 ## Contributions
 
-Please read
-[`CONTRIBUTIONS.md`](https://github.com/Ophuscado/py-player1dev/blob/master/CONTRIBUTIONS.md) before submitting a pull request. For security reports, please follow our
-[responsible disclosure policy.](https://ophuscado.com/security)
+Please read [`CONTRIBUTIONS.md`](https://github.com/Example/app/blob/master/CONTRIBUTIONS.md) before submitting a pull request. For security reports, please follow our [responsible disclosure policy.](https://example.com/security)
 
 ## Documentation
 
@@ -20,7 +18,7 @@ Please read
 
 ## License
 
-Copyright (c) 2020-2023, Ophuscado LLC.
+Copyright (c) 2023, Example.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 

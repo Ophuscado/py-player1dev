@@ -1,0 +1,7 @@
+Acknowledgments: https://example.com/contributors
+Canonical: https://example.com/.well-known/security.txt
+Contact: mailto:security@example.com
+Expires: Sat, 31 Dec 2024 23:59 +0000
+Encryption: https://example.com/files/example-ecdsa.asc
+Preferred-Languages: en, es, zh
+Policy: https://example.com/security
