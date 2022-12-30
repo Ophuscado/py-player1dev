@@ -1,7 +1,5 @@
 """
-Simple framework for building (web) apps with Python and Flet. The client is made to operate locally, but can be deployed to a server. The server is made to operate on a server, but can be deployed locally. What you have to decide is the exposition and scope of both. Giving public access to the `client.py` will have serious security risks.
-
-It relies on Flet (Flutter) and FastAPI. Flet is a Python library that allows you to build Flutter apps with Python. FastAPI is a Python library that allows you to build web apps with Python.
+A framework for perfectionists to build at light speed. Powered by Flet (Flutter) and FastAPI.
 """
 
 import importlib
