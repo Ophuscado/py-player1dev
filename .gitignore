@@ -1,8 +1,9 @@
 .*~$
 .DS_Store
 .env
-/.venv/
 *.log
 *.mo
 *.pyc
 /.coverage
+/.venv/
+/dist/
