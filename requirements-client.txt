@@ -1,1 +1,6 @@
+wheel
+
 flet
+lxml
+markdown
+python-dotenv

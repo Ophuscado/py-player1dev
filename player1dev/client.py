@@ -7,7 +7,7 @@ import importlib
 import flet as ft
 
 
-def main(page: ft.Page, sidebar, navbar):
+def main(page: ft.Page):
     page.window_height = 720
     page.window_width = 1280
     page.window_min_height = 600
@@ -29,7 +29,7 @@ def main(page: ft.Page, sidebar, navbar):
             ft.View(
                 f"/{page_route}",
                 [view.main(page)],
-                appbar=navbar.main(page),
+                # appbar=navbar.main(page),
                 horizontal_alignment="center",
                 vertical_alignment="center",
             )
@@ -47,12 +47,12 @@ def main(page: ft.Page, sidebar, navbar):
     page.on_view_pop = view_pop
     page.go(page.route)
 
-    rail = sidebar.main(page)
+    # rail = sidebar.main(page)
     page.add(
         ft.Row(
             [
-                rail,
-                ft.VerticalDivider(width=1),
+                # rail,
+                # ft.VerticalDivider(width=1),
                 ft.Column(
                     [view for view in page.views],
                     alignment=ft.MainAxisAlignment.START,
