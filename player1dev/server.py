@@ -73,7 +73,7 @@ def login(username: str, password: str):
 
 @app.get("/sitemap.xml")
 def generate_sitemap(request: Request, routes: List[APIRoute] = Depends(get_routes)):
-    url_root = str(request.url).rstrip(request.url.path)
+    url_root = str(request.url).replace(request.url.path, "")
     # domain_name = url_root.lstrip(request.url.scheme + "://")
     root = etree.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
 
@@ -90,7 +90,7 @@ def generate_sitemap(request: Request, routes: List[APIRoute] = Depends(get_rout
             continue
 
         url = etree.SubElement(root, "url")
-        etree.SubElement(url, "loc").text = f"{url_root}{route.path}"
+        etree.SubElement(url, "loc").text = f"{url_root.replace("http://", "https://")}{route.path}"
     markdown_files_dir = "content"
     markdown_files = [
         f
@@ -104,7 +104,7 @@ def generate_sitemap(request: Request, routes: List[APIRoute] = Depends(get_rout
         url = etree.SubElement(root, "url")
         etree.SubElement(
             url, "loc"
-        ).text = f"{url_root}/{markdown_file.replace('_', '/').rstrip('.md')}"
+        ).text = f"{url_root.replace("http://", "https://")}/{markdown_file.replace('_', '/').replace('.md', '')}"
 
     return Response(
         content=etree.tostring(root).decode("utf8"), media_type="application/xml"
