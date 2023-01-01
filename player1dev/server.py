@@ -76,18 +76,19 @@ def generate_sitemap(request: Request, routes: List[APIRoute] = Depends(get_rout
     url_root = str(request.url).rstrip(request.url.path)
     # domain_name = url_root.lstrip(request.url.scheme + "://")
     root = etree.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+
     for route in routes:
         if route.path in [
             "/{slug:path}",
+            "/assets",
             "/docs",
             "/docs/oauth2-redirect",
-            "/home",
             "/openapi.json",
             "/redoc",
             "/sitemap.xml",
-            f"/{assets}",
         ]:
             continue
+
         url = etree.SubElement(root, "url")
         etree.SubElement(url, "loc").text = f"{url_root}{route.path}"
     markdown_files_dir = "content"
@@ -96,11 +97,15 @@ def generate_sitemap(request: Request, routes: List[APIRoute] = Depends(get_rout
         for f in listdir(markdown_files_dir)
         if isfile(join(markdown_files_dir, f)) and f.endswith(".md")
     ]
+
     for markdown_file in markdown_files:
+        if markdown_file in ["home.md", "error404.md", "error500.md"]:
+            continue
         url = etree.SubElement(root, "url")
         etree.SubElement(
             url, "loc"
         ).text = f"{url_root}/{markdown_file.replace('_', '/').rstrip('.md')}"
+
     return Response(
         content=etree.tostring(root).decode("utf8"), media_type="application/xml"
     )
