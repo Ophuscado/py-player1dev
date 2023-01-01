@@ -4,10 +4,11 @@ from datetime import datetime, timedelta
 from os import listdir
 from os.path import isfile, join
 from typing import List, Optional
+from urllib.request import Request
 
 import jinja2
 import markdown
-from fastapi import Depends, FastAPI, HTTPException, Security
+from fastapi import Depends, FastAPI, HTTPException, Request, Security
 from fastapi.responses import RedirectResponse, Response
 from fastapi.routing import APIRoute
 from fastapi.security import OAuth2PasswordBearer
@@ -71,11 +72,24 @@ def login(username: str, password: str):
 
 
 @app.get("/sitemap.xml")
-def generate_sitemap(routes: List[APIRoute] = Depends(get_routes)):
+def generate_sitemap(request: Request, routes: List[APIRoute] = Depends(get_routes)):
+    url_root = str(request.url).rstrip(request.url.path)
+    # domain_name = url_root.lstrip(request.url.scheme + "://")
     root = etree.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for route in routes:
+        if route.path in [
+            "/{slug:path}",
+            "/docs",
+            "/docs/oauth2-redirect",
+            "/home",
+            "/openapi.json",
+            "/redoc",
+            "/sitemap.xml",
+            f"/{assets}",
+        ]:
+            continue
         url = etree.SubElement(root, "url")
-        etree.SubElement(url, "loc").text = f"https://liverado.com{route.path}"
+        etree.SubElement(url, "loc").text = f"{url_root}{route.path}"
     markdown_files_dir = "content"
     markdown_files = [
         f
@@ -86,7 +100,7 @@ def generate_sitemap(routes: List[APIRoute] = Depends(get_routes)):
         url = etree.SubElement(root, "url")
         etree.SubElement(
             url, "loc"
-        ).text = f"https://liverado.com/{markdown_file.replace('_', '/').rstrip('.md')}"
+        ).text = f"{url_root}/{markdown_file.replace('_', '/').rstrip('.md')}"
     return Response(
         content=etree.tostring(root).decode("utf8"), media_type="application/xml"
     )
