@@ -90,7 +90,9 @@ def generate_sitemap(request: Request, routes: List[APIRoute] = Depends(get_rout
             continue
 
         url = etree.SubElement(root, "url")
-        etree.SubElement(url, "loc").text = f"{url_root.replace("http://", "https://")}{route.path}"
+        etree.SubElement(
+            url, "loc"
+        ).text = f"{url_root.replace('http://', 'https://')}{route.path}"
     markdown_files_dir = "content"
     markdown_files = [
         f
