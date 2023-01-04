@@ -72,6 +72,7 @@ def login(username: str, password: str):
 
 
 @app.get("/sitemap.xml")
+@app.head("/sitemap.xml")
 def generate_sitemap(request: Request, routes: List[APIRoute] = Depends(get_routes)):
     url_root = str(request.url).replace(request.url.path, "")
     # domain_name = url_root.lstrip(request.url.scheme + "://")
@@ -114,9 +115,11 @@ def generate_sitemap(request: Request, routes: List[APIRoute] = Depends(get_rout
 
 
 @app.get("/{slug:path}")
+@app.head("/{slug:path}")
 def static_router(slug: str):
     """
-    Compile static pages from Markdown files and custom HTML templates. The slug is the path to the file, with underscores replacing slashes. For example, the slug "about_us" will look for the file "content/about_us.md". In either case, it will look for a template with the same name, e.g. "templates/about_us.html". If neither is found, it will return a 404 error. If the Markdown file is newer than the HTML file, it will recompile the HTML file."""
+    Compile static pages from Markdown files and custom HTML templates. The slug is the path to the file, with underscores replacing slashes. For example, the slug "about_us" will look for the file "content/about_us.md". In either case, it will look for a template with the same name, e.g. "templates/about_us.html". If neither is found, it will return a 404 error. If the Markdown file is newer than the HTML file, it will recompile the HTML file.
+    """
 
     use_cache = False  # For debugging
 
