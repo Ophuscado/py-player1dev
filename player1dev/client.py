@@ -133,7 +133,15 @@ class Sidebar(UserControl):
             )
             for view_name in [
                 module_name.replace(".py", "")
-                for module_name in os.listdir("views")
+                for module_name in os.listdir(
+                    os.path.join(os.path.dirname(__file__), "views")
+                )
+                + os.listdir(
+                    os.path.join(
+                        os.path.dirname(os.path.realpath(sys.argv[0])),
+                        "views",
+                    )
+                )
                 if module_name.endswith(".py") and module_name != "__init__.py"
             ]
         ]
@@ -1054,7 +1062,7 @@ class Player1Client(UserControl):
         # create an initial board for demonstration if no boards
         # if len(self.boards) == 0:
         #     self.create_new_board("My First Board")
-        # self.page.go("/")
+        self.page.go("/")
 
     def login(self, e):
         def close_dlg(e):
@@ -1109,7 +1117,7 @@ class Player1Client(UserControl):
         page_route = (
             troute.route[1:].split("/")[0]
             if troute.route.startswith("/") and len(troute.route) > 1
-            else "home"
+            else "default"
         )
         try:
             # view = importlib.import_module(f"player1dev.views.{page_route}")
